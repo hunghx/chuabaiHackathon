@@ -85,11 +85,11 @@ public class Product implements Comparable<Product> {
 	public void inputData(List<Catalog> list) {
 		System.out.print("Nhập tên sản phẩm: ");
 		this.productName = Inputmethods.getString();
-		System.out.print("Nhập giá sản phẩm: ");
+		System.out.print("Nhập giá sản phẩm(lớn hơn 0): ");
 		this.productPrice = Inputmethods.getPosituveNumber();
 		System.out.print("Nhập vào mô tả: ");
 		this.description = Inputmethods.getString();
-		System.out.print("Nhập vào stock: ");
+		System.out.print("Nhập vào stock(lớn hơn 10): ");
 		this.stock = Inputmethods.getStock();
 		for (Catalog c : list) {
 			System.out.println(c);
