@@ -2,7 +2,9 @@ package ra.model;
 
 import ra.config.Inputmethods;
 
-public class Catalog {
+import java.io.Serializable;
+
+public class Catalog implements Serializable {
 	private int catalogId;
 	private String catalogName;
 	

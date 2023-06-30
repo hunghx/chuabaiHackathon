@@ -2,9 +2,10 @@ package ra.model;
 
 import ra.config.Inputmethods;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Product implements Comparable<Product> {
+public class Product implements Comparable<Product>, Serializable {
 	private String productId;
 	private String productName;
 	private double productPrice;

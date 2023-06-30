@@ -1,14 +1,20 @@
 package ra.service;
 
 import ra.model.Catalog;
+import ra.util.IOFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogService implements IService<Catalog, Integer> {
-	
-	private List<Catalog> listCatalog = new ArrayList<>();
-	
+	private IOFile<Catalog> ioFile;
+	private List<Catalog> listCatalog ;
+
+	public CatalogService() {
+		ioFile = new IOFile<Catalog>();
+		this.listCatalog = ioFile.readFromFile(IOFile.CATALOG_FILE);
+	}
+
 	@Override
 	public List<Catalog> getAll() {
 		return listCatalog;
@@ -21,6 +27,7 @@ public class CatalogService implements IService<Catalog, Integer> {
 		} else {
 			listCatalog.set(listCatalog.indexOf(findById(catalog.getCatalogId())), catalog);
 		}
+		ioFile.writeToFile(listCatalog,IOFile.CATALOG_FILE);
 	}
 	
 	@Override
@@ -37,6 +44,7 @@ public class CatalogService implements IService<Catalog, Integer> {
 	public void delete(Integer integer) {
 		if (findById(integer) != null) {
 			listCatalog.remove(findById(integer));
+			ioFile.writeToFile(listCatalog,IOFile.CATALOG_FILE);
 		} else {
 			System.err.println("Không có mục lục này");
 		}

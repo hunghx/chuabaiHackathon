@@ -1,14 +1,21 @@
 package ra.service;
 
+import ra.model.Catalog;
 import ra.model.Product;
+import ra.util.IOFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService implements IService<Product, String> {
-	
-	private List<Product> products = new ArrayList<>();
-	
+	private IOFile<Product> ioFile;
+	private List<Product> products ;
+
+	public ProductService() {
+		ioFile = new IOFile<>();
+		this.products = ioFile.readFromFile(IOFile.PRODUCT_FILE);
+	}
+
 	@Override
 	public List<Product> getAll() {
 		return products;
@@ -21,6 +28,7 @@ public class ProductService implements IService<Product, String> {
 		} else {
 			products.set(products.indexOf(findById(product.getProductId())), product);
 		}
+		ioFile.writeToFile(products,IOFile.PRODUCT_FILE);
 	}
 	
 	@Override
@@ -37,6 +45,7 @@ public class ProductService implements IService<Product, String> {
 	public void delete(String s) {
 		if (findById(s) != null) {
 			products.remove(findById(s));
+			ioFile.writeToFile(products,IOFile.PRODUCT_FILE);
 		} else {
 			System.err.println("Không có sản phẩm này");
 		}
